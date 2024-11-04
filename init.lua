@@ -1110,3 +1110,5 @@ vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.check_complete()', { expr = true, n
 
 -- Optionally map <S-Tab> for selecting previous item
 vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "<C-p>" : "<S-Tab>"', { expr = true, noremap = true, silent = true })
+
+vim.g.R_path = 'C:\\Users\\b6037482\\AppData\\Local\\Programs\\R\\R-4.3.3\\bin\\x64\\R.exe'
