@@ -1019,6 +1019,7 @@ require('lazy').setup({
   require 'kickstart.plugins.vimtex',
   require 'kickstart.plugins.bufferline',
   require 'kickstart.plugins.nvim-cmp',
+  require 'kickstart.plugins.markdown_nvim',
 
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
