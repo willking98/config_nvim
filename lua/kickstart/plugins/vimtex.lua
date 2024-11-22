@@ -3,7 +3,7 @@ return {
   lazy = false, -- we don't want to lazy load VimTeX
   -- tag = "v2.15", -- uncomment to pin to a specific release
   init = function()
-    -- VimTeX configuration goes here, e.g.
+    -- VimTeX configuration goes here
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'tex',
       callback = function()
@@ -13,11 +13,8 @@ return {
       end,
     })
 
-    vim.g.vimtex_compiler_method = 'latexrun'
-    vim.g.vimtex_compiler_latexrun = {
-      exe = 'latexrun',
-      err_log = true,
-    }
-    vim.g.vimtex_view_method = 'zathura'
+    -- Use latexmk with VimTeX
+    vim.g.vimtex_compiler_method = 'latexmk'
+    vim.g.vimtex_view_method = 'zathura' -- or any preferred viewer
   end,
 }

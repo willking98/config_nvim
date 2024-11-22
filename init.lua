@@ -244,7 +244,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Keep cursor in middle of screen while scrolling
-vim.opt.scrolloff = 30
+vim.opt.scrolloff = 5
 
 -- [[ Basic Keymaps ]]
 -- Set jj to ESC
@@ -1020,6 +1020,8 @@ require('lazy').setup({
   require 'kickstart.plugins.bufferline',
   require 'kickstart.plugins.nvim-cmp',
   require 'kickstart.plugins.markdown_nvim',
+  require 'kickstart.plugins.markdown-preview',
+  require 'kickstart.plugins.catpuccin',
 
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
@@ -1097,6 +1099,18 @@ vim.api.nvim_set_keymap('n', '0', '^', { noremap = true, silent = true })
 -- Quick save <leader>w
 vim.api.nvim_set_keymap('n', '<leader>w', ':w!<CR>', { noremap = true, silent = true })
 
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function(data)
+    -- Check if the opened buffer is a directory
+    if vim.fn.isdirectory(data.file) == 1 then
+      -- Change to the directory
+      vim.cmd.cd(data.file)
+      -- Open neo-tree
+      require('neo-tree.command').execute { toggle = true, dir = data.file }
+    end
+  end,
+})
+
 -- Function to handle completion with Tab
 local function check_complete()
   if vim.fn.pumvisible() == 1 then
@@ -1113,3 +1127,18 @@ vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.check_complete()', { expr = true, n
 vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "<C-p>" : "<S-Tab>"', { expr = true, noremap = true, silent = true })
 
 vim.g.R_path = 'C:\\Users\\b6037482\\AppData\\Local\\Programs\\R\\R-4.3.3\\bin\\x64\\R.exe'
+
+vim.cmd [[
+  autocmd VimEnter * lcd  C:\Users\b6037482\Dropbox\
+  ]]
+
+-- Ensure I get markdown formatting in qmd
+vim.cmd [[
+  augroup filetype_qmd
+    autocmd!
+    autocmd BufRead,BufNewFile *.qmd set filetype=markdown
+  augroup END
+]]
+
+-- Set colourscheme
+vim.cmd.colorscheme 'catppuccin-mocha'
