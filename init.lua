@@ -1022,6 +1022,7 @@ require('lazy').setup({
   require 'kickstart.plugins.markdown_nvim',
   require 'kickstart.plugins.markdown-preview',
   require 'kickstart.plugins.catpuccin',
+  require 'kickstart.plugins.git',
 
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
