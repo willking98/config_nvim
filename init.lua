@@ -173,6 +173,8 @@ vim.api.nvim_set_keymap('n', '<leader>w', ':w!<CR>', { noremap = true, silent = 
 -- nnoremap k gk
 --
 
+-- Added random comment to practice jumps
+--
 -- 0 to first non empty character
 
 -- Set <space> as the leader key
@@ -1019,7 +1021,7 @@ require('lazy').setup({
   require 'kickstart.plugins.R-nvim',
   -- require 'kickstart.plugins.dashboard',
   -- require 'kickstart.plugins.vimtex',
-  require 'kickstart.plugins.bufferline',
+  -- require 'kickstart.plugins.bufferline',
   require 'kickstart.plugins.nvim-cmp',
   require 'kickstart.plugins.markdown_nvim',
   -- require 'kickstart.plugins.markdown-preview',
