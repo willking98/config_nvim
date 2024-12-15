@@ -31,7 +31,7 @@ return {
     },
     pdfviewer = '',
     lsp = {
-      diagnostics = false, -- Disables all diagnostics
+      diagnostics = true, -- Disables all diagnostics
     },
   },
   config = function(_, opts)

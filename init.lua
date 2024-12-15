@@ -97,20 +97,6 @@ vim.api.nvim_set_keymap('v', '"', '<esc>`>a"<esc>`<i"<esc>', { noremap = true, s
 vim.api.nvim_set_keymap('v', "'", "<esc>`>a'<esc>`<i'<esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<', '<esc>`>a`<esc>`<i`<esc>', { noremap = true, silent = true })
 
---TODO: Latex settings
-
--- Wrap math mode around visually selected text for LaTeX
--- vim.api.nvim_set_keymap('v', 'm', '<esc>`>a\\)<esc>`<i\\(<esc>', { noremap = true, silent = true })
---
--- -- LaTeX settings
--- vim.opt.linebreak = true
--- vim.opt.wrap = true
-
--- LaTeX shortcuts for headings
--- vim.api.nvim_set_keymap('n', '<leader>1', ':execute "normal! O\\\\section{}"<CR>i', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>2', ':execute "normal! O\\\\subsection{}"<CR>i', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>3', ':execute "normal! O\\\\subsubsection{}"<CR>i', { noremap = true, silent = true })
-
 -- Move line down/up with J/K in visual mode
 vim.api.nvim_set_keymap('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
@@ -129,54 +115,6 @@ vim.api.nvim_set_keymap('n', '0', '^', { noremap = true, silent = true })
 -- Quick save <leader>w
 vim.api.nvim_set_keymap('n', '<leader>w', ':w!<CR>', { noremap = true, silent = true })
 
--- Remove all annoying linting
--- Disable all diagnostics globally
--- vim.diagnostic.config {
---   virtual_text = false, -- Disable inline diagnostic messages
---   signs = false, -- Disable diagnostic signs in the gutter
---   underline = false, -- Disable underlining of lines with issues
---   update_in_insert = false, -- Don't update diagnostics in insert mode
---   severity_sort = false, -- Disable sorting diagnostics by severity
--- }
-
--- Use Tab to confirm completion in Neovim's built-in completion
--- vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "<C-y>" : "<Tab>"', { expr = true, noremap = true })
-
--- Depreciated vimscript comfig
---
---
--- -- " Surround selected text by bracket/parenthesis etc.
--- vnoremap ( <esc>`>a)<esc>`<i(<esc>
--- vnoremap [ <esc>`>a]<esc>`<i[<esc>
--- vnoremap " <esc>`>a"<esc>`<i"<esc>
--- vnoremap ' <esc>`>a'<esc>`<i'<esc>
--- vnoremap < <esc>`>a`<esc>`<i`<esc>
---
--- -- " Wrap math mode around visually selected text for latex
--- vnoremap m <esc>`>a\)<esc>`<i\(<esc>
---
--- -- " Latex settings
--- set linebreak
--- set wrap
---
--- -- " Latex shortcuts for headings
--- nmap <leader>1 :execute "normal! O\\section{}"<CR>i
--- nmap <leader>2 :execute "normal! O\subsection{}"<CR>i
--- nmap <leader>3 :execute "normal! O\subsubsection{}"<CR>i
---
--- -- " move line down/up with J/K
--- vnoremap J :m '>+1<CR>gv=gv  " Move current line down
--- vnoremap K :m '<-2<CR>gv=gv  " Move current line up
---
--- -- " remap gj/gk to j/k for .tex wrapped lines
--- nnoremap j gj
--- nnoremap k gk
---
-
--- Added random comment to practice jumps
---
--- 0 to first non empty character
-
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -184,7 +122,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -253,6 +191,8 @@ vim.opt.scrolloff = 5
 -- [[ Basic Keymaps ]]
 -- Set jj to ESC
 vim.keymap.set('i', 'jj', '<ESC>')
+vim.keymap.set('i', 'jk', '<ESC>')
+vim.keymap.set('i', 'kj', '<ESC>')
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -432,19 +372,23 @@ require('lazy').setup({
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      { -- If encountering errors, see telescope-fzf-native README for installation instructions
+      {
         'nvim-telescope/telescope-fzf-native.nvim',
-
-        -- `build` is used to run some command when the plugin is installed/updated.
-        -- This is only run then, not every time Neovim starts up.
-        build = 'make',
-
-        -- `cond` is a condition used to determine whether this plugin should be
-        -- installed and loaded.
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
       },
+      -- { -- If encountering errors, see telescope-fzf-native README for installation instructions
+      --   'nvim-telescope/telescope-fzf-native.nvim',
+      --
+      --   -- `build` is used to run some command when the plugin is installed/updated.
+      --   -- This is only run then, not every time Neovim starts up.
+      --   build = 'make',
+      --
+      --   -- `cond` is a condition used to determine whether this plugin should be
+      --   -- installed and loaded.
+      --   cond = function()
+      --     return vim.fn.executable 'make' == 1
+      --   end,
+      -- },
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
@@ -873,9 +817,9 @@ require('lazy').setup({
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -1017,14 +961,9 @@ require('lazy').setup({
   -- require 'kickstart.plugins.autopairs',
 
   -- Plugins I have added!
-  -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.R-nvim',
-  -- require 'kickstart.plugins.dashboard',
-  -- require 'kickstart.plugins.vimtex',
-  -- require 'kickstart.plugins.bufferline',
   require 'kickstart.plugins.nvim-cmp',
   require 'kickstart.plugins.markdown_nvim',
-  -- require 'kickstart.plugins.markdown-preview',
   require 'kickstart.plugins.catpuccin',
   require 'kickstart.plugins.git',
 
@@ -1064,10 +1003,11 @@ require('lazy').setup({
 -- Will's Keymaps
 --
 --
---- Remap jj to escape in insert mode
-vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', 'jk', '<Esc>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', 'kj', '<Esc>', { noremap = true, silent = true })
+-- [[ Basic Keymaps ]]
+-- Set jj to ESC
+vim.keymap.set('i', 'jj', '<ESC>')
+vim.keymap.set('i', 'jk', '<ESC>')
+vim.keymap.set('i', 'kj', '<ESC>')
 
 -- Surround selected text by bracket/parenthesis etc.
 vim.api.nvim_set_keymap('v', '(', '<esc>`>a)<esc>`<i(<esc>', { noremap = true, silent = true })
@@ -1100,20 +1040,6 @@ vim.api.nvim_set_keymap('n', '0', '^', { noremap = true, silent = true })
 
 -- Quick save <leader>w
 vim.api.nvim_set_keymap('n', '<leader>w', ':w!<CR>', { noremap = true, silent = true })
-
-vim.api.nvim_create_autocmd('VimEnter', {
-  callback = function(data)
-    -- Check if the opened buffer is a directory
-    if vim.fn.isdirectory(data.file) == 1 then
-      -- Change to the directory
-      vim.cmd.cd(data.file)
-      -- Open neo-tree
-      require('neo-tree.command').execute { toggle = true, dir = data.file }
-    end
-  end,
-})
-
--- Function to handle completion with Tab
 
 -- Map <Tab> for completion
 
