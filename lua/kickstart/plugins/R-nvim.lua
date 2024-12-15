@@ -17,7 +17,6 @@ return {
           { '<localleader>a', group = 'all' },
           { '<localleader>b', group = 'between marks' },
           { '<localleader>c', group = 'chunks' },
-          { '<localleader>f', group = 'functions' },
           { '<localleader>g', group = 'goto' },
           { '<localleader>i', group = 'install' },
           { '<localleader>k', group = 'knit' },
@@ -32,7 +31,7 @@ return {
     },
     pdfviewer = '',
     lsp = {
-      diagnostics = true, -- Disables all diagnostics
+      diagnostics = false, -- Disables all diagnostics
     },
   },
   config = function(_, opts)

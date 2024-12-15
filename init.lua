@@ -97,17 +97,19 @@ vim.api.nvim_set_keymap('v', '"', '<esc>`>a"<esc>`<i"<esc>', { noremap = true, s
 vim.api.nvim_set_keymap('v', "'", "<esc>`>a'<esc>`<i'<esc>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<', '<esc>`>a`<esc>`<i`<esc>', { noremap = true, silent = true })
 
--- Wrap math mode around visually selected text for LaTeX
-vim.api.nvim_set_keymap('v', 'm', '<esc>`>a\\)<esc>`<i\\(<esc>', { noremap = true, silent = true })
+--TODO: Latex settings
 
--- LaTeX settings
-vim.opt.linebreak = true
-vim.opt.wrap = true
+-- Wrap math mode around visually selected text for LaTeX
+-- vim.api.nvim_set_keymap('v', 'm', '<esc>`>a\\)<esc>`<i\\(<esc>', { noremap = true, silent = true })
+--
+-- -- LaTeX settings
+-- vim.opt.linebreak = true
+-- vim.opt.wrap = true
 
 -- LaTeX shortcuts for headings
-vim.api.nvim_set_keymap('n', '<leader>1', ':execute "normal! O\\\\section{}"<CR>i', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>2', ':execute "normal! O\\\\subsection{}"<CR>i', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>3', ':execute "normal! O\\\\subsubsection{}"<CR>i', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>1', ':execute "normal! O\\\\section{}"<CR>i', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>2', ':execute "normal! O\\\\subsection{}"<CR>i', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>3', ':execute "normal! O\\\\subsubsection{}"<CR>i', { noremap = true, silent = true })
 
 -- Move line down/up with J/K in visual mode
 vim.api.nvim_set_keymap('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
@@ -129,16 +131,16 @@ vim.api.nvim_set_keymap('n', '<leader>w', ':w!<CR>', { noremap = true, silent = 
 
 -- Remove all annoying linting
 -- Disable all diagnostics globally
-vim.diagnostic.config {
-  virtual_text = false, -- Disable inline diagnostic messages
-  signs = false, -- Disable diagnostic signs in the gutter
-  underline = false, -- Disable underlining of lines with issues
-  update_in_insert = false, -- Don't update diagnostics in insert mode
-  severity_sort = false, -- Disable sorting diagnostics by severity
-}
+-- vim.diagnostic.config {
+--   virtual_text = false, -- Disable inline diagnostic messages
+--   signs = false, -- Disable diagnostic signs in the gutter
+--   underline = false, -- Disable underlining of lines with issues
+--   update_in_insert = false, -- Don't update diagnostics in insert mode
+--   severity_sort = false, -- Disable sorting diagnostics by severity
+-- }
 
 -- Use Tab to confirm completion in Neovim's built-in completion
-vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "<C-y>" : "<Tab>"', { expr = true, noremap = true })
+-- vim.api.nvim_set_keymap('i', '<Tab>', 'pumvisible() ? "<C-y>" : "<Tab>"', { expr = true, noremap = true })
 
 -- Depreciated vimscript comfig
 --
@@ -1013,14 +1015,14 @@ require('lazy').setup({
   -- require 'kickstart.plugins.autopairs',
 
   -- Plugins I have added!
-  require 'kickstart.plugins.neo-tree',
+  -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.R-nvim',
-  require 'kickstart.plugins.dashboard',
-  require 'kickstart.plugins.vimtex',
+  -- require 'kickstart.plugins.dashboard',
+  -- require 'kickstart.plugins.vimtex',
   require 'kickstart.plugins.bufferline',
   require 'kickstart.plugins.nvim-cmp',
   require 'kickstart.plugins.markdown_nvim',
-  require 'kickstart.plugins.markdown-preview',
+  -- require 'kickstart.plugins.markdown-preview',
   require 'kickstart.plugins.catpuccin',
   require 'kickstart.plugins.git',
 
@@ -1062,13 +1064,15 @@ require('lazy').setup({
 --
 --- Remap jj to escape in insert mode
 vim.api.nvim_set_keymap('i', 'jj', '<Esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', 'jk', '<Esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', 'kj', '<Esc>', { noremap = true, silent = true })
 
 -- Surround selected text by bracket/parenthesis etc.
 vim.api.nvim_set_keymap('v', '(', '<esc>`>a)<esc>`<i(<esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '[', '<esc>`>a]<esc>`<i[<esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '"', '<esc>`>a"<esc>`<i"<esc>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', "'", "<esc>`>a'<esc>`<i'<esc>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<', '<esc>`>a`<esc>`<i`<esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '`', '<esc>`>a`<esc>`<i`<esc>', { noremap = true, silent = true })
 
 -- Wrap math mode around visually selected text for LaTeX
 vim.api.nvim_set_keymap('v', 'm', '<esc>`>a\\)<esc>`<i\\(<esc>', { noremap = true, silent = true })
@@ -1076,11 +1080,6 @@ vim.api.nvim_set_keymap('v', 'm', '<esc>`>a\\)<esc>`<i\\(<esc>', { noremap = tru
 -- LaTeX settings
 vim.opt.linebreak = true
 vim.opt.wrap = true
-
--- LaTeX shortcuts for headings
-vim.api.nvim_set_keymap('n', '<leader>1', ':execute "normal! O\\\\section{}"<CR>i', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>2', ':execute "normal! O\\\\subsection{}"<CR>i', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>3', ':execute "normal! O\\\\subsubsection{}"<CR>i', { noremap = true, silent = true })
 
 -- Move line down/up with J/K in visual mode
 vim.api.nvim_set_keymap('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
@@ -1091,8 +1090,8 @@ vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true, silent = true })
 
 -- remap leader h and l for buffer navigation
-vim.api.nvim_set_keymap('n', '<leader>h', ':bprevious<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>l', ':bnext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'H', ':bprevious<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'L', ':bnext<CR>', { noremap = true, silent = true })
 
 -- Remap VIM 0 to first non-blank character
 vim.api.nvim_set_keymap('n', '0', '^', { noremap = true, silent = true })
@@ -1113,25 +1112,10 @@ vim.api.nvim_create_autocmd('VimEnter', {
 })
 
 -- Function to handle completion with Tab
-local function check_complete()
-  if vim.fn.pumvisible() == 1 then
-    return '<C-n>' -- Use Ctrl-n to select the next item in the completion menu
-  else
-    return '<Tab>' -- Otherwise, just insert a tab character
-  end
-end
 
 -- Map <Tab> for completion
-vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.check_complete()', { expr = true, noremap = true, silent = true })
-
--- Optionally map <S-Tab> for selecting previous item
-vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "<C-p>" : "<S-Tab>"', { expr = true, noremap = true, silent = true })
 
 vim.g.R_path = 'C:\\Users\\b6037482\\AppData\\Local\\Programs\\R\\R-4.3.3\\bin\\x64\\R.exe'
-
-vim.cmd [[
-  autocmd VimEnter * lcd  C:\Users\b6037482\Dropbox\
-  ]]
 
 -- Ensure I get markdown formatting in qmd
 vim.cmd [[
@@ -1143,3 +1127,9 @@ vim.cmd [[
 
 -- Set colourscheme
 vim.cmd.colorscheme 'catppuccin-mocha'
+
+-- set folding in md automatically
+vim.cmd [[
+  autocmd FileType markdown setlocal foldmethod=expr
+  autocmd FileType markdown setlocal foldexpr=nvim_treesitter#foldexpr()
+]]
