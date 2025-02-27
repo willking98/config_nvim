@@ -969,6 +969,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.nvim-cmp',
   require 'kickstart.plugins.completion',
   require 'kickstart.plugins.markdown_nvim',
+  require 'kickstart.plugins.noice',
   require 'kickstart.plugins.catpuccin',
   require 'kickstart.plugins.git',
   require 'kickstart.plugins.yazi',
@@ -1059,7 +1060,7 @@ vim.cmd [[
 ]]
 
 -- Set colourscheme
-vim.cmd.colorscheme 'catppuccin-mocha'
+vim.cmd.colorscheme 'tokyonight-storm'
 
 -- set folding in md automatically
 -- vim.cmd [[
